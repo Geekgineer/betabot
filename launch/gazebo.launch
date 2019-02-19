@@ -1,0 +1,58 @@
+<launch>
+  <!-- <include
+    file="$(find gazebo_ros)/launch/empty_world.launch" />
+  <node
+    name="tf_footprint_base"
+    pkg="tf"
+    type="static_transform_publisher"
+    args="0 0 0 0 0 0 base_link base_footprint 40" />
+  <node
+    name="spawn_model"
+    pkg="gazebo_ros"
+    type="spawn_model"
+    args="-file $(find betabot)/betabot_description/urdf/betabot.urdf.xacro -urdf -model betabot"
+    output="screen" />
+  <node
+    name="fake_joint_calibration"
+    pkg="rostopic"
+    type="rostopic"
+    args="pub /calibrated std_msgs/Bool true" /> -->
+
+  <arg name="world" default="empty"/> 
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+  
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <!--arg name="world_name" value="$(find betabot_gazebo)/worlds/betabot.world"/-->
+    <!-- <arg name="world_name" value="$(find betabot_gazebo)/worlds/turtlebot_playground.world"/> -->
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="headless" value="$(arg headless)"/>
+    <arg name="debug" value="$(arg debug)"/>
+  </include>
+
+  
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find betabot)/betabot_description/urdf/betabot.urdf.xacro'"/>
+
+  <node name="betabot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
+   args="-urdf -param robot_description -model betabot" />
+    
+  
+  <rosparam param="/gazebo_ros_control/pid_gains">
+    left_wheel_link:
+      p: 10
+      i: 0.1
+      d: 0
+  </rosparam>
+  <rosparam param="/gazebo_ros_control/pid_gains">
+    right_wheel_link:
+      p: 10
+      i: 0.1
+      d: 0
+  </rosparam>
+
+</launch>

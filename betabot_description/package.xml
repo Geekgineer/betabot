@@ -1,5 +1,5 @@
 <package>
-  <name>betabot</name>
+  <name>betabot_description</name>
   <version>1.0.0</version>
   <description>
     <p>URDF Description package for betabot</p>

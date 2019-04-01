@@ -6,7 +6,7 @@
     default="False" />
   <param
     name="robot_description"
-    textfile="$(find betabot)/betabot_description/urdf/betabot.urdf.xacro" />
+    textfile="$(find betabot_description)/urdf/betabot.urdf.xacro" />
   <param
     name="use_gui"
     value="$(arg gui)" />

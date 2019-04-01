@@ -10,7 +10,7 @@
     name="spawn_model"
     pkg="gazebo_ros"
     type="spawn_model"
-    args="-file $(find betabot)/betabot_description/urdf/betabot.urdf.xacro -urdf -model betabot"
+    args="-file $(find betabot_description)/urdf/betabot.urdf.xacro -urdf -model betabot"
     output="screen" />
   <node
     name="fake_joint_calibration"
@@ -26,7 +26,7 @@
   <arg name="debug" default="false"/>
   
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <!--arg name="world_name" value="$(find betabot_gazebo)/worlds/betabot.world"/-->
+    <arg name="world_name" value="$(find betabot_gazebo)/worlds/clearpath_playpen.world"/>
     <!-- <arg name="world_name" value="$(find betabot_gazebo)/worlds/turtlebot_playground.world"/> -->
     <arg name="paused" value="$(arg paused)"/>
     <arg name="use_sim_time" value="$(arg use_sim_time)"/>
@@ -36,7 +36,7 @@
   </include>
 
   
-  <param name="robot_description" command="$(find xacro)/xacro.py '$(find betabot)/betabot_description/urdf/betabot.urdf.xacro'"/>
+  <param name="robot_description" command="$(find xacro)/xacro.py '$(find betabot_description)/urdf/betabot.urdf.xacro'"/>
 
   <node name="betabot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen"
    args="-urdf -param robot_description -model betabot" />
@@ -54,5 +54,10 @@
       i: 0.1
       d: 0
   </rosparam>
+
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+    <param name="publish_frequency" type="double" value="30.0" />
+  </node>
+
 
 </launch>

@@ -1,20 +1,20 @@
 <?xml version='1.0'?>
   <!--
-  ______        _           _             _   
-  | ___ \      | |         | |           | |  
-  | |_/ /  ___ | |_   __ _ | |__    ___  | |_ 
+  ______        _           _             _
+  | ___ \      | |         | |           | |
+  | |_/ /  ___ | |_   __ _ | |__    ___  | |_
   | ___ \ / _ \| __| / _` || '_ \  / _ \ | __|
-  | |_/ /|  __/| |_ | (_| || |_) || (_) || |_ 
-  \____/  \___| \__| \__,_||_.__/  \___/  \__| URDF Description--> 
+  | |_/ /|  __/| |_ | (_| || |_) || (_) || |_
+  \____/  \___| \__| \__,_||_.__/  \___/  \__| URDF Description-->
 
 <robot name="betabot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 <!-- CALL HEADER FILES FOR MACROS AND GAZEBO PLUGINS -->
-  <xacro:include filename="$(find betabot_description)/urdf/betabot.gazebo" />
+  <xacro:include filename="$(find betabot_description)/urdf/betabot.gazebo.xacro" />
   <xacro:include filename="$(find betabot_description)/urdf/materials.xacro" />
   <xacro:include filename="$(find betabot_description)/urdf/macros.xacro" />
 
-<!-- ***** BETABOT BASE PART***** -->                                                                              
+<!-- ***** BETABOT BASE PART***** -->
   <link name="base_footprint"/>
 
   <joint name="base_joint" type="fixed">
@@ -31,7 +31,7 @@
     </inertial>
     <visual>
       <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry> 
+      <geometry>
         <mesh filename="package://betabot_description/meshes/betabot_base.dae" />
       </geometry>
       <material name="">
@@ -41,22 +41,22 @@
     <!-- COMMENT THE ORGINAL COLLISION MODEL,NEEDS MORE PROCESSING POWER -->
     <!-- <collision>
       <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry> 
-        <mesh filename="package://betabot_description/meshes/betabot_base.dae" /> 
+      <geometry>
+        <mesh filename="package://betabot_description/meshes/betabot_base.dae" />
       </geometry>
     </collision> -->
-  
+
     <!-- SIMPLIFIED COLLISOION MESH FOR FOR SMOOTH PROCESSING -->
     <collision>
       <geometry>
         <cylinder length="0.004" radius="0.15"/>
       </geometry>
-      <origin rpy="0 0 0" xyz="0  0 0.0825"/>
-    </collision> 
+      <origin rpy="0 0 0" xyz="0  0 0.05"/>
+    </collision>
   </link>
 
-<!-- ***** BETABOT LEFT WHEEL PART ***** -->   
-  <link name="left_wheel_link">
+<!-- ***** BETABOT RIGHT WHEEL PART ***** -->
+  <link name="right_wheel_link">
     <inertial>
       <origin xyz="1.7347E-17 -7.3726E-17 -0.015" rpy="0 0 0" />
       <mass value="0.5" />
@@ -79,23 +79,23 @@
     </collision> -->
     <collision>
       <geometry>
-        <cylinder length="0.025" radius="0.0325"/>
+        <cylinder length="0.03" radius="0.0325"/>
       </geometry>
-      <origin rpy="0 0 0" xyz="0 0 -0.02"/>
-    </collision> 
+      <origin rpy="0 0 0" xyz="0 0 0.016"/>
+    </collision>
   </link>
 
   <!-- JOINT -->
-  <joint name="left_wheel_joint" type="continuous">
-    <origin xyz="-0.095 0 -0.0125" rpy="-1.5708 1.3735 -1.5708" />
+  <joint name="right_wheel_joint" type="continuous">
+    <origin xyz="0 -0.097 -0.0125" rpy="-1.5708 1.3735 3.14159265359" />
     <parent link="base_link" />
-    <child link="left_wheel_link" />
-    <axis xyz="0 0 1" />
+    <child link="right_wheel_link" />
+    <axis xyz="0 0 -1" />
   </joint>
 
-<!-- ***** BETABOT RIGHT WHEEL PART ***** -->   
+<!-- ***** BETABOT LEFT WHEEL PART ***** -->
   <!-- LINK -->
-  <link name="right_wheel_link">
+  <link name="left_wheel_link">
     <inertial>
       <origin xyz="-1.7347E-17 -7.3726E-17 -0.015" rpy="0 0 0" />
       <mass value="0.5" />
@@ -121,21 +121,21 @@
     </collision> -->
     <collision>
       <geometry>
-        <cylinder length="0.025" radius="0.0325"/>
+        <cylinder length="0.03" radius="0.0325"/>
       </geometry>
-      <origin rpy="0 0 0" xyz="0  0 -0.02"/>
-    </collision>    
+      <origin rpy="0 0 0" xyz="0 0 0.016"/>
+    </collision>
   </link>
 
   <!-- JOINT -->
-  <joint name="right_wheel_joint" type="continuous">
-    <origin xyz="0.095 0 -0.0125" rpy="-1.5708 1.5228 1.5708" />
+  <joint name="left_wheel_joint" type="continuous">
+    <origin xyz="0 0.097 -0.0125" rpy="-1.5708 1.5228 0" />
     <parent link="base_link" />
-    <child link="right_wheel_link" />
-    <axis xyz="0 0 -1" />
+    <child link="left_wheel_link" />
+    <axis xyz="0 0 1" />
   </joint>
 
-<!-- ***** BETABOT FRONT CASTER WHEEL ***** --> 
+<!-- ***** BETABOT FRONT CASTER WHEEL ***** -->
    <!-- LINK -->
   <link name="front_caster_link">
     <inertial>
@@ -165,19 +165,19 @@
       <geometry>
          <sphere radius="0.020"/>
       </geometry>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-    </collision>      
+      <origin rpy="0 0 0" xyz="0 -0.0026 0"/>
+    </collision>
   </link>
 
   <!-- JOINT -->
   <joint name="front_caster_joint" type="fixed">
-    <origin xyz="0 -0.105 -0.02231" rpy="1.5708 6.123E-17 1.5708" />
+    <origin xyz="0.105 0 -0.02231" rpy="1.5708 6.123E-17 1.5708" />
     <parent link="base_link" />
     <child link="front_caster_link" />
     <axis xyz="0 0 0" />
   </joint>
 
-<!-- ***** BETABOT BACK CASTER WHEEL ***** --> 
+<!-- ***** BETABOT BACK CASTER WHEEL ***** -->
   <!-- LINK -->
   <link name="back_caster_link">
     <inertial>
@@ -208,12 +208,12 @@
       <geometry>
          <sphere radius="0.020"/>
       </geometry>
-      <origin rpy="0 0 0" xyz="0 -0.002 0"/>
-    </collision>     
+      <origin rpy="0 0 0" xyz="0 -0.0026 0"/>
+    </collision>
   </link>
   <!-- JOINT -->
   <joint name="back_caster_joint" type="fixed">
-    <origin xyz="0 0.105 -0.02231" rpy="1.5708 6.123E-17 1.5708" />
+    <origin xyz="-0.105 0 -0.02231" rpy="1.5708 6.123E-17 1.5708" />
     <parent link="base_link" />
     <child link="back_caster_link" />
     <axis xyz="0 0 0" />
@@ -223,7 +223,7 @@
   <!-- LINK -->
   <link name="camera_link">
     <visual>
-      <origin xyz="0 0 0" rpy="0 1.570 0" />
+      <origin xyz="0 0 0" rpy="0 1.570 1.570" />
       <geometry>
         <mesh filename="package://betabot_description/meshes/raspicam.dae" />
       </geometry>
@@ -241,42 +241,13 @@
   <!-- JOINT -->
   <joint name="camera_joint" type="fixed">
     <axis xyz="0 0 0" />
-    <origin xyz="0 -0.148 0.040" rpy="0 0 -1.570"/>
+    <origin xyz="0.148 0 0.036" rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="camera_link"/>
   </joint>
 
-<!-- ***** RPLiDAR A1 RANGE FINDER SENSOR SIMULATED PART ***** -->
-  <!-- LINK -->
-  <link name="rplidar_link">
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <geometry>
-        <box size="0.1 0.1 0.1"/>
-      </geometry>
-    </collision>
-    <visual>
-      <origin xyz="0 0 -0.032" rpy="0 0 0"/>
-      <geometry>
-        <mesh filename="package://betabot_description/meshes/rplidar.dae"/>
-      </geometry>
-    </visual>
-    <inertial>
-      <mass value="1e-5" />
-      <origin xyz="0 0 0" rpy="0 0 0"/>
-      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
-    </inertial>
-  </link>
-  <!-- JOINT -->
-  <joint name="rplidar_joint" type="fixed">
-    <axis xyz="0 1 0" />
-    <origin xyz="0 0 .1" rpy="0 0 0"/>
-    <parent link="base_link"/>
-    <child link="rplidar_link"/>
-  </joint>
-     
 <!-- ***** IMU SENSOR PART ***** -->
-  
+  <!-- LINK -->
   <link name="imu_sensor_link">
       <collision>
           <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -296,14 +267,72 @@
           <inertia ixx="0.00000015" ixy="0" ixz="0" iyy="0.00000015" iyz="0" izz="0.00000015" />
       </inertial>
   </link>
-
+  <!-- JOINT -->
   <joint name="imu_sensor_joint" type="fixed">
       <axis xyz="0 0 1" />
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <parent link="base_link"/>
       <child link="imu_sensor_link"/>
   </joint>
-  
+
+<!-- ***** RPLiDAR A1 RANGE FINDER SENSOR SIMULATED PART ***** -->
+  <!-- LINK -->
+  <!-- <link name="rplidar_link">
+    <collision>
+      <origin xyz="0 0 -0.03" rpy="0 0 0"/>
+      <geometry>
+         <sphere radius="0.045"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 -0.032" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://betabot_description/meshes/rplidar.dae"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link> -->
+  <!-- JOINT -->
+  <!-- <joint name="rplidar_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="0 0 .1" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="rplidar_link"/>
+  </joint> -->
+
+<!-- ***** RPLiDAR A2 RANGE FINDER SENSOR SIMULATED PART ***** -->
+  <!-- LINK -->
+  <link name="rplidar_link">
+    <collision>
+      <origin xyz="0 0 -0.03" rpy="0 0 0"/>
+      <geometry>
+         <sphere radius="0.045"/>
+      </geometry>
+    </collision>
+    <visual>
+      <origin xyz="0 0 -0.032" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://betabot_description/meshes/rplidar_a2.dae"/>
+      </geometry>
+    </visual>
+    <inertial>
+      <mass value="1e-5" />
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
+    </inertial>
+  </link>
+  <!-- JOINT -->
+  <joint name="rplidar_joint" type="fixed">
+    <axis xyz="0 1 0" />
+    <origin xyz="0 0 .109" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="rplidar_link"/>
+  </joint>
+
 </robot>
 
 

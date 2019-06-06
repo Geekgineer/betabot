@@ -2,8 +2,12 @@
 <COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <asset>
     <contributor>
-      <author>Blender User</author>
+      <author>Abdalrahman M. Amer</author>
       <authoring_tool>Blender 2.80.48 commit date:2019-03-13, commit time:00:20, hash:bf9904ec8018</authoring_tool>
+      <!-- <comments>
+        This mesh is part of opensource project betabot robot molded with solidWorks and  
+        edited with blender,All rights reserved,email: abdalrahman.m5959@gmail.com.
+      <comments> -->
     </contributor>
     <created>2019-06-06T06:44:58</created>
     <modified>2019-06-06T06:44:58</modified>

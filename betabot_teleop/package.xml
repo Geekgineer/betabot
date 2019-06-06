@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>betabot_teleop</name>
+  <version>1.2.0</version>
+  <description>
+    Provides teleoperation using keyboard for Betabot, this teleop package based on turtleBot3_teleop package by Melonee Wise from robotis.com.
+  </description>
+  <license>BSD</license>
+  <author>Melonee Wise</author>
+  <author email="thlim@robotis.com">Darby Lim</author>
+  <maintainer email="abdalrahman.m5959@gmail.com">amer</maintainer>
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>rospy</depend>
+  <depend>geometry_msgs</depend>
+</package>

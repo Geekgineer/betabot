@@ -21,12 +21,6 @@
     />
   </macro>
 
-
-
-
-
-
-
   <macro name="wheel" params="lr tY">
 
     <link name="${lr}_wheel">
@@ -84,9 +78,4 @@
     </transmission>
 
   </macro-->
-
-
-
-
-
 </robot>

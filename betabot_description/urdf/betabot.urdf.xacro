@@ -5,14 +5,16 @@
   | |_/ /  ___ | |_   __ _ | |__    ___  | |_
   | ___ \ / _ \| __| / _` || '_ \  / _ \ | __|
   | |_/ /|  __/| |_ | (_| || |_) || (_) || |_
-  \____/  \___| \__| \__,_||_.__/  \___/  \__| URDF Description-->
+  \____/  \___| \__| \__,_||_.__/  \___/  \__| URDF-XACRO Description-->
 
 <robot name="betabot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 <!-- CALL HEADER FILES FOR MACROS AND GAZEBO PLUGINS -->
   <xacro:include filename="$(find betabot_description)/urdf/betabot.gazebo.xacro" />
-  <xacro:include filename="$(find betabot_description)/urdf/materials.xacro" />
+  <xacro:include filename="$(find betabot_description)/urdf/common_properties.urdf.xacro" />
   <xacro:include filename="$(find betabot_description)/urdf/macros.xacro" />
+  <xacro:include filename="$(find betabot_description)/urdf/betabot_d435_properties.urdf.xacro" />
+
 
 <!-- ***** BETABOT BASE PART***** -->
   <link name="base_footprint"/>
@@ -219,9 +221,48 @@
     <axis xyz="0 0 0" />
   </joint>
 
+<!-- ***** BETABOT EXTENSION ***** -->
+  <joint name="base_extension_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="base_extension_link"/>
+    <origin xyz="0.0 0.0 0.35" rpy="0 0 0"/>
+  </joint>
+
+  <link name="base_extension_link">
+    <inertial>
+      <origin xyz="2.8456E-05 0.02785 0.00053742" rpy="0 0 0" />
+      <mass value="5.67773" />
+      <inertia ixx="0.019995" ixy="0.0" ixz="0.0" iyy="0.019995" iyz="0.0" izz="0.03675" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 1.5708" />
+      <geometry>
+        <mesh filename="package://betabot_description/meshes/betabot_extension.dae" />
+      </geometry>
+      <material name="">
+        <color rgba="0.79608 0.82353 0.93725 1" />
+      </material>
+    </visual>
+    <!-- COMMENT THE ORGINAL COLLISION MODEL,NEEDS MORE PROCESSING POWER -->
+    <!-- <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://betabot_description/meshes/betabot_base.dae" />
+      </geometry>
+    </collision> -->
+
+    <!-- SIMPLIFIED COLLISOION MESH FOR FOR SMOOTH PROCESSING -->
+    <collision>
+      <geometry>
+        <cylinder length="0.004" radius="0.15"/>
+      </geometry>
+      <origin rpy="0 0 0" xyz="0  0 0.05"/>
+    </collision>
+  </link>
+
 <!-- ***** RASPBERRY PI 8MB CAMERA SIMULATED PART ***** -->
   <!-- LINK -->
-  <link name="camera_link">
+  <!-- <link name="camera_link">
     <visual>
       <origin xyz="0 0 0" rpy="0 1.570 1.570" />
       <geometry>
@@ -237,14 +278,14 @@
       <box_inertia m="0.01" x="0.05" y="0.05" z="0.05" />
       <inertia ixx="1e-6" ixy="0" ixz="0" iyy="1e-6" iyz="0" izz="1e-6" />
     </inertial>
-  </link>
+  </link> -->
   <!-- JOINT -->
-  <joint name="camera_joint" type="fixed">
+  <!-- <joint name="camera_joint" type="fixed">
     <axis xyz="0 0 0" />
     <origin xyz="0.148 0 0.036" rpy="0 0 0"/>
     <parent link="base_link"/>
     <child link="camera_link"/>
-  </joint>
+  </joint>  -->
 
 <!-- ***** IMU SENSOR PART ***** -->
   <!-- LINK -->
@@ -328,11 +369,129 @@
   <!-- JOINT -->
   <joint name="rplidar_joint" type="fixed">
     <axis xyz="0 1 0" />
-    <origin xyz="0 0 .109" rpy="0 0 0"/>
+    <origin xyz="0 0 .109" rpy="0 0 1.57"/>
     <parent link="base_link"/>
     <child link="rplidar_link"/>
   </joint>
 
+
+<!-- REALSENSE SIMULATED PART -->
+<!-- URDF model for the Intel RealSense 430 camera, in it's aluminum peripherial evaluation case -->
+    
+    <!--~~~~~~~~ camera body, with origin at bottom screw mount ~~~~~~~~-->
+    <!-- JOINT -->
+    <joint name="camera_joint" type="fixed">
+       <origin xyz="${cam_px} ${cam_py} ${cam_pz}" rpy="${cam_or} ${cam_op} ${cam_oy}"/>
+      <parent link="${parent}"/>
+      <child link="camera_bottom_screw_frame" />
+    </joint>
+    <link name="camera_bottom_screw_frame"/>
+
+    <joint name="camera_link_joint" type="fixed">
+      <origin xyz="0 ${d435_cam_depth_py} ${d435_cam_depth_pz}" rpy="0 0 0"/>
+      <parent link="camera_bottom_screw_frame"/>
+      <child link="camera_link" />
+    </joint>
+    <!-- LINK -->
+    <link name="camera_link">
+      <visual>
+      <origin xyz="${d435_cam_mount_from_center_offset} ${-d435_cam_depth_py} 0" rpy="${M_PI/2} 0 ${M_PI/2}"/>
+        <geometry>
+          <!-- <box size="${d435_cam_width} ${d435_cam_height} ${d435_cam_depth}"/> -->
+          <mesh filename="package://betabot_description/meshes/d435.dae" />
+          <!--<mesh filename="package://realsense2_description/meshes/d435/d435.dae" />-->
+        </geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 ${-d435_cam_depth_py} 0" rpy="0 0 0"/>
+        <geometry>
+        <box size="${d435_cam_depth} ${d435_cam_width} ${d435_cam_height}"/>
+        </geometry>
+      </collision>
+      <inertial>
+        <!-- The following are not reliable values, and should not be used for modeling -->
+        <mass value="0.564" />
+        <origin xyz="0 0 0" />
+        <inertia ixx="0.003881243" ixy="0.0" ixz="0.0" iyy="0.000498940" iyz="0.0" izz="0.003879257" />
+      </inertial>
+    </link>
+   
+    <!--~~~~~~~~ camera depth joints and links ~~~~~~~~-->
+    <!-- JOINT -->
+    <joint name="camera_depth_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <parent link="camera_link"/>
+      <child link="camera_depth_frame" />
+    </joint>
+    <!-- LINK -->
+    <link name="camera_depth_frame"/>
+    
+    <!-- JOINT -->
+    <joint name="camera_depth_optical_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="${-M_PI/2} 0 ${-M_PI/2}" />
+      <parent link="camera_depth_frame" />
+      <child link="camera_depth_optical_frame" />
+    </joint>
+    <!-- LINK -->
+    <link name="camera_depth_optical_frame"/>
+    
+    <!--~~~~~~~~ camera left IR joints and links ~~~~~~~~-->
+    <!-- JOINT -->
+    <joint name="camera_left_ir_joint" type="fixed">
+      <origin xyz="0 ${d435_cam_depth_to_left_ir_offset} 0" rpy="0 0 0" />
+      <parent link="camera_depth_frame" />
+      <child link="camera_left_ir_frame" />
+    </joint>
+    <!-- LINK -->
+    <link name="camera_left_ir_frame"/>
+
+    <!-- JOINT -->
+    <joint name="camera_left_ir_optical_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="${-M_PI/2} 0 ${-M_PI/2}" />
+      <parent link="camera_left_ir_frame" />
+      <child link="camera_left_ir_optical_frame" />
+    </joint>
+    <!-- LINK -->
+    <link name="camera_left_ir_optical_frame"/>
+
+    <!--~~~~~~~~ camera right IR joints and links ~~~~~~~~-->
+    <!-- JOINT -->
+    <joint name="camera_right_ir_joint" type="fixed">
+      <origin xyz="0 ${d435_cam_depth_to_right_ir_offset} 0" rpy="0 0 0" />
+      <parent link="camera_depth_frame" />
+      <child link="camera_right_ir_frame" />
+    </joint>
+    <!-- LINK -->
+    <link name="camera_right_ir_frame"/>
+
+    <!-- JOINT -->
+    <joint name="camera_right_ir_optical_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="${-M_PI/2} 0 ${-M_PI/2}" />
+      <parent link="camera_right_ir_frame" />
+      <child link="camera_right_ir_optical_frame" />
+    </joint>
+    <!-- LINK -->
+    <link name="camera_right_ir_optical_frame"/>
+
+    <!--~~~~~~~~ camera color joints and links ~~~~~~~~-->
+    <!-- JOINT -->
+    <joint name="camera_color_joint" type="fixed">
+      <origin xyz="0 ${d435_cam_depth_to_color_offset} 0" rpy="0 0 0" />
+      <parent link="camera_depth_frame" />
+      <child link="camera_color_frame" />
+    </joint>
+    <!-- LINK -->
+    <link name="camera_color_frame"/>
+
+    <!-- JOINT -->
+    <joint name="camera_color_optical_joint" type="fixed">
+      <origin xyz="0 0 0" rpy="${-M_PI/2} 0 ${-M_PI/2}" />
+      <parent link="camera_color_frame" />
+      <child link="camera_color_optical_frame" />
+    </joint>
+    <!-- LINK -->
+    <link name="camera_color_optical_frame"/>
+    
 </robot>
 
 

@@ -14,7 +14,7 @@
   <!-- ============================================= -->
   <!-- ===================Betabot=================== -->
   <!-- first betabot name -->
-  <arg name="first_bb"  default=""/>
+  <arg name="first_bb"  default="betabot"/>
   <!--  betabot location -->
   <arg name="first_bb_x_pos" default="0.0"/>
   <arg name="first_bb_y_pos" default="0.0"/>

@@ -8,8 +8,11 @@
   \____/  \___| \__| \__,_||_.__/  \___/  \__| Gazebo Plugins--> 
 
 <robot name="betabot_gazebo" xmlns:xacro="http://ros.org/wiki/xacro">
+  
+  <xacro:property name="M_PI" value="3.1415926535897931" />
 
-  <!-- <gazebo reference="left_wheel_link">
+<!-- 
+  <gazebo reference="left_wheel_link">
     <mu1>0.1</mu1>
     <mu2>0.1</mu2>
     <kp>500000.0</kp>
@@ -46,6 +49,49 @@
     <minDepth>0.001</minDepth>
     <maxVel>1.0</maxVel>
   </gazebo> -->
+<!-- 
+    <gazebo reference="left_wheel_link">
+    <mu1>0.1</mu1>
+    <mu2>0.1</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>0.1</maxVel>
+    <fdir1>1 0 0</fdir1>
+    <material>Gazebo/FlatBlack</material>
+  </gazebo>
+
+  <gazebo reference="right_wheel_link">
+    <mu1>0.1</mu1>
+    <mu2>0.1</mu2>
+    <kp>500000.0</kp>
+    <kd>10.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>0.1</maxVel>
+    <fdir1>1 0 0</fdir1>
+    <material>Gazebo/FlatBlack</material>
+  </gazebo>
+
+  <gazebo reference="back_caster_link">
+    <mu1>0.1</mu1>
+    <mu2>0.1</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>1.0</maxVel>
+    <material>Gazebo/FlatBlack</material>
+  </gazebo>
+
+  <gazebo reference="front_caster_link">
+    <mu1>0.1</mu1>
+    <mu2>0.1</mu2>
+    <kp>1000000.0</kp>
+    <kd>100.0</kd>
+    <minDepth>0.001</minDepth>
+    <maxVel>1.0</maxVel>
+    <material>Gazebo/FlatBlack</material>
+  </gazebo> -->
+
 
 <!-- ***** RASPBERRY PI 8MB CAMERA SIMULATED ***** -->
   <!--gazebo reference="camera_link">

@@ -178,7 +178,7 @@
     <parent link="base_link" />
     <child link="front_caster_link" />
     <axis xyz="0 0 0" />
-    <dynamics damping="0.0" friction="0.0"/>
+    <dynamics damping="0.1" friction="0.1"/>
   </joint>
 
 <!-- ***** BETABOT BACK CASTER WHEEL ***** -->
@@ -221,7 +221,7 @@
     <parent link="base_link" />
     <child link="back_caster_link" />
     <axis xyz="0 0 0" />
-    <dynamics damping="0.0" friction="0.0"/>
+    <dynamics damping="0.1" friction="0.1"/>
   </joint>
 
 <!-- ***** BETABOT EXTENSION ***** -->

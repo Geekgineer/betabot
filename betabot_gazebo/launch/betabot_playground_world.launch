@@ -11,15 +11,6 @@
     <arg name="headless" value="false"/>
     <arg name="debug" value="false"/>
   </include> 
-  <!-- ============================================= -->
-  <!-- ===================Betabot=================== -->
-  <!-- first betabot name -->
-  <arg name="first_bb"  default=""/>
-  <!--  betabot location -->
-  <arg name="first_bb_x_pos" default="0.0"/>
-  <arg name="first_bb_y_pos" default="0.0"/>
-  <arg name="first_bb_z_pos" default=" 0.0"/>
-  <arg name="first_bb_yaw"   default=" 0.0"/>
 
     
   <!-- call betabot urdf description -->
@@ -31,25 +22,15 @@
   <!-- Combine joint values -->
   <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
     <param name="publish_frequency" type="double" value="50.0" /> </node>
-  
-  <!-- bring betabot to the world -->
-  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model $(arg first_bb) -x $(arg first_bb_x_pos) -y $(arg first_bb_y_pos) -z $(arg first_bb_z_pos) -Y $(arg first_bb_yaw) -param robot_description" />
 
-  <!-- ============================================= -->
-  <!-- =================ExtraParam================== -->
-  <!-- PID parameters of betabot wheels -->
-  <rosparam param="/gazebo_ros_control/pid_gains">
-    left_wheel_link:
-      p: 10
-      i: 0.1
-      d: 0
-  </rosparam>
-  <rosparam param="/gazebo_ros_control/pid_gains">
-    right_wheel_link:
-      p: 10
-      i: 0.1
-      d: 0
-  </rosparam>
+  <!-- bring betabot to the world -->
+  <!-- <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model $(arg first_bb) -x $(arg first_bb_x_pos) -y $(arg first_bb_y_pos) -z $(arg first_bb_z_pos) -Y $(arg first_bb_yaw) -param robot_description" /> -->
+  
+  <!-- Spawn the robot in custom location -->
+  <!-- <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" output="screen" args="-param robot_description -urdf -model betabot -x 2.5 -y 2.5 -z 0" /> -->
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" output="screen" args="-param robot_description -urdf -model betabot  -x 0.0 -y 0.0 -z 0.0" />
+
+
 
 
 </launch>

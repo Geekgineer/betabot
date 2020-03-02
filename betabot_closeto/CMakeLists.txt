@@ -133,6 +133,10 @@ include_directories(
 ## Declare a C++ executable
 ## With catkin_make all packages are built within a single CMake context
 ## The recommended prefix ensures that target names across packages don't collide
+
+######### landmark server as executable c++ node #########
+#=========================Start===============================#
+
 add_executable(${PROJECT_NAME}_landmark_monitor src/landmark_monitor.cpp)
 
 ## Rename C++ executable without prefix
@@ -149,6 +153,22 @@ add_dependencies(${PROJECT_NAME}_landmark_monitor ${${PROJECT_NAME}_EXPORTED_TAR
 target_link_libraries(${PROJECT_NAME}_landmark_monitor
   ${catkin_LIBRARIES}
 )
+#=========================End==================================#
+
+
+######### landmark client as executable c++ node #########
+#=========================Start===============================#
+add_executable(${PROJECT_NAME}_landmark_client src/landmark_client.cpp)
+
+set_target_properties(${PROJECT_NAME}_landmark_client PROPERTIES OUTPUT_NAME landmark_client PREFIX "")
+
+add_dependencies(${PROJECT_NAME}_landmark_client ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+
+target_link_libraries(${PROJECT_NAME}_landmark_client
+  ${catkin_LIBRARIES}
+)
+#=========================End==================================#
+
 
 #############
 ## Install ##

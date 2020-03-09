@@ -1,0 +1,16 @@
+<launch>
+
+  <!-- The Robot Description parameter must be embedded xml, not the path to the file on disc.
+  You can load the XML using ROS xacro parser-->
+
+  <!-- Load the xacro file -->
+  <arg name="model" default="$(find betabot_description)/urdf/betabot.urdf.xacro"/> 
+
+  <!-- Parse the xacro file -->
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model)" />
+
+  <!-- The Robot Model display of rviz requires the URDF or the xacro to have a visual or collision tag 
+       defined in order to view your robot. -->
+  <node type="rviz" name="rviz" pkg="rviz" args="-d $(find betabot_description)/rviz/betabot.rviz" />
+
+</launch>

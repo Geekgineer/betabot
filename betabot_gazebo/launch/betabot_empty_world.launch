@@ -27,8 +27,8 @@
   <!-- <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model $(arg first_bb) -x $(arg first_bb_x_pos) -y $(arg first_bb_y_pos) -z $(arg first_bb_z_pos) -Y $(arg first_bb_yaw) -param robot_description" /> -->
   
   <!-- Spawn the robot in custom location -->
-  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" output="screen" args="-param robot_description -urdf -model betabot -x 2.5 -y 2.5 -z 0" />
-  <!-- <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" output="screen" args="-param robot_description -urdf -model betabot  -x 0.0 -y 0.0 -z 0.0" /> -->
+  <!-- <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" output="screen" args="-param robot_description -urdf -model betabot -x 2.5 -y 2.5 -z 0" /> -->
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" output="screen" args="-param robot_description -urdf -model betabot  -x 0.0 -y 0.0 -z 0.0" />
 
   <!-- ============================================= -->
   <!-- =================ExtraParam================== -->

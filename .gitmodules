@@ -1,0 +1,6 @@
+[submodule "odom_to_trajectory"]
+	path = odom_to_trajectory
+	url = https://github.com/udacity/odom_to_trajectory
+[submodule "robot_pose_ekf"]
+	path = robot_pose_ekf
+	url = https://github.com/udacity/robot_pose_ekf

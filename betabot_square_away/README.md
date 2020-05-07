@@ -51,19 +51,28 @@ bool success # Did it achieve it?
 >To make you project standout try another shape and to use filtered `odemtry` data.
 
 ---
+## I have shown you the code to the TA a lot of times but I lost it and couldn't replicate it again.
 
 ## After you implement the pkg state your reflection below
 
 ### How did you plan the task?
 
+That assignment was rather interesting for me, I made a service that moves in any *polygon* with a certain side length; the service takes the number of sides of that polygon with a lower bound of 3 sides and in the ideal world, there are no upper bound.
+</br>I also made a domain specific language for moving the robot with a very primitive lexer and parser and very simple grammer ```<command> <expression>``` and two commands which are move and rotate and expressions is supplied with the proper values. 
+
 
 ### What ROS REPs did you used?
+
+I referred to REP 128/144, they are about naming convention
 
 
 ### How we could increase the overall performance?
 
+The errors emanate from the IMU readings that decides when to stop and when to rotate and how much rotation in needed. It could be improved if we fused the sensor with kalman filter.
 
 ### List the most time consuming problems you faced
+
+This task really wasn't very hard per se, but it was a very good first assignment. The most time consuming problems were that I was getting accustomed to the ROS framework.
 
 ---
 

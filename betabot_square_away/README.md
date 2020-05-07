@@ -58,7 +58,7 @@ bool success # Did it achieve it?
 ### How did you plan the task?
 
 That assignment was rather interesting for me, I made a service that moves in any *polygon* with a certain side length; the service takes the number of sides of that polygon with a lower bound of 3 sides and in the ideal world, there are no upper bound.
-</br>I also made a domain specific language for moving the robot with a very primitive lexer and parser and very simple grammer ```<command> <expression>``` and two commands which are move and rotate and expressions is supplied with the proper values. 
+</br>I also made a domain specific language for moving the robot with a very primitive lexer and parser and very simple grammer ```<command> <expression>``` and two commands which are ```move``` and ```rotate``` and expressions are supplied with the proper values and format. 
 
 
 ### What ROS REPs did you used?
@@ -87,7 +87,7 @@ Add unlisted youtube/drive video
 
 ---
 
-#### NAME:
-#### ID:
+#### NAME: Omar Khaled
+#### ID: 201600454
 
 ---

@@ -79,35 +79,46 @@ Follow where am I project from Udacity Software Robotics Engineer Nanodegree.
 
 ### In your own words how amcl works?
 
+monte carlo localization is some sort of particle filter. It calculate the distribution of likely state and the word *particle* is synonyms for likely state. It began with a normal distribution for all the states and as the robot moves the distribution becomes more inclined to a certain state/particle.
+
 ### Is there other better approaches to localize your robot rather than amcl?
+apparently there is according to wikipedia, there is something called kullback-leibler divergence algorithm which is used in ROS.
 
 ### What are the amcl limitations or the fail cases?
-
+I don't see much of limitations as it has a linear time complexity and the space is linear with number of particles.
 ### Is amcl used in domain rather than Robotics?
-
+I couldn't find any source talks about that, but off the top of my head
 ---
 
 ## Part III: Navigation (move_base)
 
 ### How many official local planner available in ROS?
 
+I didn't find explicit list of all the planners but I found 5 planners: base_local_planner, carrot_planner, dwa_local_planner, global_planner.
+
 ### which local planner did you use?
+
+base_local_planner
 
 ### In your own words how the local planner you selected works?
 
+given a plan to follow and a costmap, the controller produces velocity commands to send to a mobile base.
+
 ### How many official global planner available in ROS?
-
+-
 ### which global planner did you use?
-
+-
 ### In your own words how the global planner you selected works?
-
+-
 
 ---
 
 ### State your suggestion increase the overall performance?
-
+Increase the number of particles for sure, and increase the radius of laser scanning would provide us with better navigation.
 
 ### List the most time consuming problems you faced
+
+setting up the libraries and packages.
 
 ---
 

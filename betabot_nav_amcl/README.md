@@ -51,6 +51,10 @@ Follow where am I project from Udacity Software Robotics Engineer Nanodegree.
 
 ---
 
+# The code is present in the directory for you to check and there is a video attached at the end 
+
+---
+
 ## After you implement the pkg state your reflection below 
 
 ---
@@ -64,10 +68,10 @@ Follow where am I project from Udacity Software Robotics Engineer Nanodegree.
 | SLAM Algorithm | ROS implementation |
 |:--------------:|:------------------:|
 |     GMapping   |      gmapping      |
-|                |                    |
-|                |                    |
-|                |                    |
-|                |                    |
+|     Laser-Slam |      tinySlam      |
+|    gridmap Slam|      mrpt_rbpf_slam|
+|    CRSM SLAM   |      crsm_slam     |
+|    RTAB-Map    |      rtabmap_ros   |
 
 ---
 
@@ -110,7 +114,9 @@ Follow where am I project from Udacity Software Robotics Engineer Nanodegree.
 ### Demos
 Add unlisted youtube/drive videos
 
-[Demo](yourlinkhere)
+# Watch here
+
+[Demo](https://drive.google.com/file/d/1g6Cwmpl8VdmW3gKw7_6sB1sZ50o7HlBf/view?usp=sharing)
 
 ### Screenshots
 1. rviz with all navigation launchers from turtulbot

@@ -1,0 +1,22 @@
+<?xml version='1.0'?>
+
+<launch>
+  <!-- <master auto="start"/> -->
+
+  <!-- Map server -->
+  <arg name="map_file" default="$(find betabot_navigation)/maps/jackal_race.yaml"/>
+  <node name="map_server" pkg="map_server" type="map_server" args="$(arg map_file)" />
+
+  <!-- Place map frame at odometry frame -->
+  <node pkg="tf" type="static_transform_publisher" name="map_odom_broadcaster"
+      args="0 0 0 0 0 0 map odom 100"/>
+
+  <!--- Run AMCL -->
+ <include file="$(find betabot_navigation)/launch/include/amcl.launch" />
+
+  <!--- Run Move Base -->
+ <include file="$(find betabot_navigation)/launch/include/move_base.launch" />
+
+</launch>
+
+

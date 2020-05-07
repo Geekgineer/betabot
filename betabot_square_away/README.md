@@ -51,7 +51,7 @@ bool success # Did it achieve it?
 >To make you project standout try another shape and to use filtered `odemtry` data.
 
 ---
-## I have shown you the code to the TA a lot of times but I lost it and couldn't replicate it again.
+## I have shown the code to the TA a lot of times but I lost it and couldn't replicate it again.
 
 ## After you implement the pkg state your reflection below
 

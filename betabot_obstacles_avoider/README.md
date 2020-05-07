@@ -26,20 +26,29 @@ scans.
 >To make you project standout try not to visit any place twice.
 
 ---
-
+## I have shown the code to the TA a lot of times but I lost it and couldn't replicate it again.
 
 
 ## After you implement the pkg state your reflection below
 
 ### How did you plan the task?
-
 ### what is your logic?
+I intended to make the robot move in straight line and when the laser array values cross a certain threshold. I made the robot rotates for 90 degrees and read the laser 
+array once again, if all the values above that threshold, *which is 2 meters*, the robot moves in a straight line. 
+
+
 
 ### What ROS REPs did you used?
 
+I referred to REP 128/144, they are about naming convention. I didn't use anything else
+
 ### How we could increase the overall performance?
 
+We could increase performance by getting a better laser reading, but I guess there is nothing to tune here to have a better readings.
+
 ### List the most time consuming problems you faced
+
+The task seemed weird for me at first, and I took a bit of time to get the algorithm rolling, but other than that the assignment was adequate.
 
 ---
 
@@ -54,7 +63,7 @@ Add unlisted youtube/drive video
 
 ---
 
-#### NAME:
-#### ID:
+#### NAME: Omar Khaled
+#### ID: 201600454
 
 ---
